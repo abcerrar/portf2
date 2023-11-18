@@ -1,0 +1,23 @@
+@import "../../assets/colors";
+
+.menuContainer{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: $background1;
+	display: flex;
+	width: 70%;
+	justify-content: center;
+	margin-top: 20px;
+	border-radius: 2px;
+
+	.menu_element{
+		color: $text2;
+		padding: 35px;
+		font-size: 1.5vw;
+		text-decoration: none;	
+	}
+	.menu_element:hover{
+		color: $text1;
+	}
+}
