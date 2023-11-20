@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import MenuElement from './MenuElement'
 import './menu.scss'
+import { useNavigate } from 'react-router-dom';
 export default function Menu(){
 
 	const [selected, setSelected] = useState(0);
 	const [selectFinish, setSelectFinish] = useState(0);
+	const last_page = localStorage.getItem("path", "/");
+	const navigate = useNavigate();
 
 	const menu_elements = [
 		<MenuElement txt="Principal" path="/home" class={`${selected === 0 ? 'selected': ''}`}/>,
@@ -29,9 +32,9 @@ export default function Menu(){
 		if (e.key === ' '){
 			e.preventDefault();
 			if (selectFinish === 0)
-				document.querySelector(".selected").click();
+				document.querySelector("#selected").click();
 			else
-				alert("Adios");
+				navigate(last_page);
 
 		}
 		if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
@@ -51,18 +54,20 @@ export default function Menu(){
 	}, [selected, selectFinish]);
 
 	return(
-		<div className="menuContainer">
-			<p>Select option</p>
-			<div className='options'>
-				{menu_elements[0]}
-				{menu_elements[1]}
-				{menu_elements[2]}
-				{menu_elements[3]}
-				{menu_elements[4]}
-			</div>
-			<div className='buttons'>
-				{menu_elements[5]}
-				{menu_elements[6]}
+		<div className='container'>
+			<div className="menuContainer">
+				<p>Select option</p>
+				<div className='options'>
+					{menu_elements[0]}
+					{menu_elements[1]}
+					{menu_elements[2]}
+					{menu_elements[3]}
+					{menu_elements[4]}
+				</div>
+				<div className='buttons'>
+					{menu_elements[5]}
+					{menu_elements[6]}
+				</div>
 			</div>
 		</div>
 	)
