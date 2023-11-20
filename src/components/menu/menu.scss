@@ -2,20 +2,60 @@
 
 .menuContainer{
 	position: absolute;
+	// height: 70%;
 	left: 50%;
-	transform: translateX(-50%);
+	top: 50%;
+	transform: translate(-50%, -50%);
 	background-color: $background1;
 	display: flex;
-	width: 70%;
-	justify-content: center;
+	flex-direction: column;
+	width: 50vh;
+	// justify-content: center;
 	margin-top: 20px;
 	border-radius: 2px;
+	border: solid $text2;
+	border-width: 3px 1px 1px 3px;
+	
+	p{
+		margin: 20px 0px 0px 20px;
+		font-size: 1.5vw;
+		color: $text2;
+	}
+
+	.options{
+		display: flex;
+		flex-direction: column;
+		border: solid $text2;
+		border-width: 1px 3px 3px 1px;
+		margin: 20px;
+		width: 90%;
+		height: 50%;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.buttons{
+		display: flex;
+		margin-top: 80px;
+		align-items: center;
+		justify-content: space-around;
+		
+		width: 100%;
+		border-top: solid $text2;
+		border-top-width: 3px;
+	}
 
 	.menu_element{
 		color: $text2;
-		padding: 35px;
 		font-size: 1.5vw;
 		text-decoration: none;	
+	}
+	.selected{
+		color: $text1;
+	}
+	.waiting{
+		background-color: $text1;
+		color: white;
 	}
 	.menu_element:hover{
 		color: $text1;
