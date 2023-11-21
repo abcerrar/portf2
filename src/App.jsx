@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import AboutMe from "./pages/aboutMe/AboutMe";
 import Menu from "./components/menu/Menu";
 import { useEffect } from "react";
+import Terminal from "./components/Terminal/Terminal";
 
 function App(){
 	return (
@@ -12,6 +13,7 @@ function App(){
 					<Route index element={<Menu/>}/>
 					<Route path="*" element={<Menu/>}/>
 					<Route path="home" element={<Home/>}/>
+					<Route path="terminal" element={<Terminal/>}/>
 					<Route path="about_me" element={<AboutMe/>}/>
 				</Route>
 			</Routes>

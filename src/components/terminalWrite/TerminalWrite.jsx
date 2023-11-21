@@ -6,7 +6,14 @@ export default function TerminarWrite(props = []){
 	const [txtPrompt, setTxtPrompt] = useState([]);
 
 	useEffect(()=>{
-		props.children.forEach(element => {
+		// console.log(props.children)
+		let content;
+		if (!Array.isArray(props.children))
+			content = [props.children];
+		else
+			content = props.children;
+			
+		content.forEach(element => {
 			txtPrompt.push({text:element.props.children,id: element.props.id});
 			setTxtPrompt(txtPrompt);
 			window.document.getElementById(element.props.id).innerHTML = "";

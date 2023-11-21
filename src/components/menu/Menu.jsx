@@ -12,7 +12,7 @@ export default function Menu(){
 	const menu_elements = [
 		<MenuElement txt="Principal" path="/home" class={`${selected === 0 ? 'selected': ''}`}/>,
 		<MenuElement txt="Sobre mi" path="/about_me" class={`${selected === 1 ? 'selected': ''}`}/>,
-		<MenuElement txt="Poryectos" class={`${selected === 2 ? 'selected': ''}`}/>,
+		<MenuElement txt="Poryectos" path="/terminal" class={`${selected === 2 ? 'selected': ''}`}/>,
 		<MenuElement txt="Habilidades" class={`${selected === 3 ? 'selected': ''}`}/>,
 		<MenuElement txt="Contacto" class={`${selected === 4 ? 'selected': ''}`}/>,
 		<MenuElement txt="<Select>" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,
