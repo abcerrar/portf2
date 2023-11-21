@@ -37,22 +37,25 @@ export default function Home(){
 		});
 	}, []);
 	return (
-		<div className="homeContainer">
+		
+		<div className="container">
+			<div className="homeContainer">
 
-			<BorderAscii height={100} width={100}>
-				<p>Hola</p>
-				<p>Hola</p>
-				<p>Hola</p>
-		
+				<Terminal path="Home" txt="./Home">
+					<BorderAscii>
+						<TerminarWrite txtSpeed={50}>
+							<h1 id="1">123456789</h1>
+							<h1 id="2">123456789</h1>
+							<h1 id="3">123456789</h1>
+							<h1 id="4">123456789</h1>
+							<h1 id="5">123456789</h1>
+							<h1 id="6">123456789</h1>
+							
+						</TerminarWrite>
+					</BorderAscii>
 			
-		
-				
-			</BorderAscii>
-			
-			{/* <TerminarWrite txtSpeed={20}>
-				<h1 id='1'>Bienvenido a mi portfolio</h1>
-				<p id='2'>Soy</p><span id='3'>David Colera</span>
-			</TerminarWrite> */}
+				</Terminal>
+			</div>
 		</div>
 	)
 }

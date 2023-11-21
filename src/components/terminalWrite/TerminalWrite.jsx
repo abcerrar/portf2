@@ -30,6 +30,7 @@ export default function TerminarWrite(props = []){
 		{
 			element = window.document.getElementById(txtPrompt[index].id);
 			element.innerHTML += txtPrompt[index].text.charAt(element.innerHTML.length);
+			// console.log(element.innerHTML)
 			if (txtPrompt[index].text.length === element.innerHTML.length)
 				setIndex(index + 1);
 			setNum(num + 1);

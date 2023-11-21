@@ -19,16 +19,15 @@
 			color: $text1;
 		}
 
-		.prompt{
-			display: flex;
-		}
-
 		p{
 			font-size: 1.6vw;
 			color: $text2;
 		}
 		.userText{
 			color: $text3;
+		}
+		.terminalPrompt{
+			display: flex;
 		}
 	}
 }

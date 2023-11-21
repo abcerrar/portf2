@@ -17,10 +17,10 @@ export default function BorderAscii(props){
 	}
 
 	useEffect(() => {
+		const container = document.getElementById("borderAscii");
 		const obtenerDimensiones = () => {
-			const container = document.getElementById("borderAscii");
 			if (container) {
-				setWith_container(container.offsetWidth / 6.6);
+				setWith_container(container.offsetWidth / 6.5);
 				if (container.offsetHeight < 350)
 					setHeight_container(Math.floor(container.offsetHeight *0.027));
 				else
@@ -28,9 +28,21 @@ export default function BorderAscii(props){
 			}
 		};
 		obtenerDimensiones();
-		window.addEventListener('resize', obtenerDimensiones)
-		console.log(height_container)
-		console.log(with_container)
+		
+		window.addEventListener('resize', obtenerDimensiones);
+		
+		const observer = new MutationObserver(obtenerDimensiones);
+		const observerConfig = {
+			attributes: true, 
+			childList: true, 
+			subtree: true, 
+			characterData: true, 
+		  };
+		  
+		  observer.observe(container, observerConfig);
+		return (()=>{
+			window.removeEventListener('resize',obtenerDimensiones);
+		})
 	})
 
 	return (
@@ -45,15 +57,6 @@ export default function BorderAscii(props){
 			</div>
 			{render_divs("right")}
 			<div className='bottom'>{horizontal_border}</div>
-			{/* <div className='top'>{horizontal_border}</div>
-			<div className='content'>
-			{render_divs("left")}
-			<div className='test'></div>
-
-			{render_divs("right")}
-			</div>
-			
-			<div className='bottom'>{horizontal_border}</div> */}
 		</div>
 	);
 }
