@@ -11,6 +11,7 @@
 		width: 70vw;
 		height: 80vh;
 		border: solid 2px grey;
+		
 		background-color: $background3;
 		border-radius: 10px;
 		padding: 15px;
@@ -23,11 +24,21 @@
 			font-size: 1.6vw;
 			color: $text2;
 		}
+		.white{
+			color: $text3;
+		}
 		.userText{
 			color: $text3;
 		}
 		.terminalPrompt{
 			display: flex;
+		}
+		.input_prompt{
+			background-color: $background3;
+			border: none;
+			font-size: 1.6vw;
+			color: white;
+			outline: none;
 		}
 	}
 }

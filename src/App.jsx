@@ -4,6 +4,7 @@ import AboutMe from "./pages/aboutMe/AboutMe";
 import Menu from "./components/menu/Menu";
 import { useEffect } from "react";
 import Terminal from "./components/Terminal/Terminal";
+import Skills from "./pages/skills/Skills";
 
 function App(){
 	return (
@@ -15,6 +16,7 @@ function App(){
 					<Route path="home" element={<Home/>}/>
 					<Route path="terminal" element={<Terminal/>}/>
 					<Route path="about_me" element={<AboutMe/>}/>
+					<Route path="skills" element={<Skills/>}/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

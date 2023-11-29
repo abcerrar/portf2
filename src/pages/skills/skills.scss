@@ -1,0 +1,18 @@
+@import '../../assets/colors.scss';
+
+.skills_container{
+	
+	h1{
+		padding: 3px;
+	}
+
+	.single_skill{
+		display: flex;
+		align-items: center;
+
+		p{
+			min-width: 70px;
+		}
+	}
+	
+}

@@ -10,24 +10,6 @@ import BorderAscii from "../../components/borderAscii/BorderAscii";
 export default function Home(){
 	const navigate = useNavigate();
 
-
-	// const borderAscii = {
-	// 	position: "relative",
-	// 	fontFamily: 'monospace',
-	// 	fontSize: '14px',
-	// 	color: 'white',
-	// 	// background: "red",
-	// 	padding: '30px',
-	// 	// '::before': {
-	// 	// 	content: '"-----------------------"',
-	// 	// 	position: "absolute",
-	// 	// 	top: '-1px',
-	// 	// 	left: '-1px',
-	// 	// 	width: 'calc(100% + 2px)',
-	// 	// 	whiteSpace: 'nowrap',
-	// 	// },
-	// };
-
 	useEffect(() => {
 		window.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape'){
@@ -35,26 +17,28 @@ export default function Home(){
 				navigate('/');
 			}
 		});
+		
 	}, []);
 	return (
 		
 		<div className="container">
 			<div className="homeContainer">
-
-				<Terminal path="Home" txt="./Home">
-					<BorderAscii>
-						<TerminarWrite txtSpeed={50}>
-							<h1 id="1">123456789</h1>
-							<h1 id="2">123456789</h1>
-							<h1 id="3">123456789</h1>
-							<h1 id="4">123456789</h1>
-							<h1 id="5">123456789</h1>
-							<h1 id="6">123456789</h1>
-							
-						</TerminarWrite>
-					</BorderAscii>
-			
-				</Terminal>
+				{/* <BorderAscii>
+					<TerminarWrite txtSpeed={50}>
+						<h1 id="1">Home</h1>
+						<p id="2">Nombre: David Colera</p>
+						<p id="3">Teléfono: 622510998</p>
+						<p id="4">Email: dcp@gmail.com</p>
+						
+						<p id="5" className="line_container">
+							<p id="8">a </p>
+							<span id="6">Soy David</span>
+							<span id="7"> y tu?</span>
+						</p>
+						
+						
+					</TerminarWrite>
+				</BorderAscii> */}
 			</div>
 		</div>
 	)
