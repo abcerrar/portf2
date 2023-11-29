@@ -1,29 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Terminal.scss'
 import TerminalPrompt from './TerminalPrompt'
 import Home from '../../pages/home/Home';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Skills from '../../pages/skills/Skills';
 
 export default function Terminal(props){
 
 	const navigate = useNavigate();
+
+	const [current_path, setCurrent_path] = useState('/');
 	const orders = [];
 	orders[0] = <TerminalPrompt username="guest" path={props.path}/>;
 
+	const url = useParams();
 	let component;
-	if (props.component === 'Home')
+	if (url['*'] === 'home')
 		component = <Home/>
-	if (props.component === 'Skills')
+	if (url['*'] === 'skills')
 		component = <Skills/>
-	console.log(props.component)
 	
 	useEffect(() => {
 		const send = (e) => {
 			if (e.key === 'Enter')
 				console.log(window.document.getElementById("input").value)
 			if (e.key === 'Escape'){
-				localStorage.setItem("path", "/home");
 				navigate('/');
 			}
 		}
@@ -34,13 +35,15 @@ export default function Terminal(props){
 	}, [])
 
 	return (
-		<div className='terminalContainer'>
-			<div className="terminal">
-				{/* <TerminalPrompt username="guest" path={props.path} txt={props.txt}/>
-				{props.children}
-				 */}
-				{component !== undefined ? component : ''}
-				{orders[0]}
+		
+		<div className='container'>
+			<div className='terminalContainer'>
+
+				<div className="terminal">
+					{url['*'] !== undefined ? <TerminalPrompt username="guest" path={url['*']} txt={'./'+url['*']}/> : undefined}
+					{component}
+					{orders[0]}
+				</div>
 			</div>
 		</div>
 	)

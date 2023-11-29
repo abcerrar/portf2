@@ -8,38 +8,25 @@ import TerminarWrite from "../../components/terminalWrite/TerminalWrite";
 import BorderAscii from "../../components/borderAscii/BorderAscii";
 
 export default function Home(){
-	const navigate = useNavigate();
 
-	useEffect(() => {
-		window.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape'){
-				localStorage.setItem("path", "/home");
-				navigate('/');
-			}
-		});
-		
-	}, []);
 	return (
-		
-		<div className="container">
-			<div className="homeContainer">
-				{/* <BorderAscii>
-					<TerminarWrite txtSpeed={50}>
-						<h1 id="1">Home</h1>
-						<p id="2">Nombre: David Colera</p>
-						<p id="3">Teléfono: 622510998</p>
-						<p id="4">Email: dcp@gmail.com</p>
-						
-						<p id="5" className="line_container">
-							<p id="8">a </p>
-							<span id="6">Soy David</span>
-							<span id="7"> y tu?</span>
-						</p>
-						
-						
-					</TerminarWrite>
-				</BorderAscii> */}
-			</div>
+		<div className="homeContainer">
+			<BorderAscii>
+				<TerminarWrite txtSpeed={50}>
+					<h1 id="1">Home</h1>
+					<p id="2">Nombre: David Colera</p>
+					<p id="3">Teléfono: 622510998</p>
+					<p id="4">Email: dcp@gmail.com</p>
+					
+					<p id="5" className="line_container">
+						<p id="8">a </p>
+						<span id="6">Soy David</span>
+						<span id="7"> y tu?</span>
+					</p>
+					
+					
+				</TerminarWrite>
+			</BorderAscii>
 		</div>
 	)
 }

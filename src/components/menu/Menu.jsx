@@ -9,11 +9,11 @@ export default function Menu(){
 	const navigate = useNavigate();
 
 	const menu_elements = [
-		<MenuElement txt="Principal" path="/terminal" class={`${selected === 0 ? 'selected': ''}`}/>,
+		<MenuElement txt="Principal" path="/terminal/home" class={`${selected === 0 ? 'selected': ''}`}/>,
 		<MenuElement txt="Sobre mi" path="/terminal" class={`${selected === 1 ? 'selected': ''}`}/>,
 		<MenuElement txt="Poryectos" path="/terminal" class={`${selected === 2 ? 'selected': ''}`}/>,
-		<MenuElement txt="Habilidades" path="/terminal" class={`${selected === 3 ? 'selected': ''}`}/>,
-		<MenuElement txt="Contacto" class={`${selected === 4 ? 'selected': ''}`}/>,
+		<MenuElement txt="Habilidades" path="/terminal/skills" class={`${selected === 3 ? 'selected': ''}`}/>,
+		<MenuElement txt="Contacto" path="/terminal" class={`${selected === 4 ? 'selected': ''}`}/>,
 		<MenuElement txt="<Select>" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,
 		<MenuElement txt="<Exit>" path="/terminal" class={`${selectFinish === 1 ? 'waiting': ''}`}/>
 	]

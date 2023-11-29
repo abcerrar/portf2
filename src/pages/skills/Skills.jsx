@@ -29,18 +29,15 @@ export default function Skills(){
 	]
 
 	return (
-		<div className="container skills_container">
-			<Terminal txt="./skills" path="skills">
-				<BorderAscii>
-					<h1>Skills</h1>
-					{
-						skills.map((skill, index) => (
-							<Skill name={skill.name} value={skill.value * 2} color={skill.color}/>		
-						))
-					}
-				</BorderAscii>
-
-			</Terminal>
+		<div className="skills_container">
+			<BorderAscii>
+				<h1>Skills</h1>
+				{
+					skills.map((skill, index) => (
+						<Skill name={skill.name} value={skill.value * 2} color={skill.color}/>		
+					))
+				}
+			</BorderAscii>
 		</div>
 	)
 }
