@@ -1,6 +1,8 @@
 # Retro Terminal Portfolio (Work in Progress)
 
 This project is an ongoing development of a retro terminal-styled portfolio. Please note that this README provides an overview of the project, which is still under development.
+![Imagen 1](/public/images/p1.png)
+Descripción de la imagen 1.
 
 ## Project Overview
 
