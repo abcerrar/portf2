@@ -1,12 +1,14 @@
 # Retro Terminal Portfolio (Work in Progress)
 
 This project is an ongoing development of a retro terminal-styled portfolio. Please note that this README provides an overview of the project, which is still under development.
-![Imagen 1](/public/images/p1.png)
-Descripción de la imagen 1.
+<br>
 
 ## Project Overview
 
 The Retro Terminal Portfolio is being developed using React for the frontend and Express for the backend. The aim is to create a simple yet visually appealing portfolio website with a retro terminal aesthetic.
+<br>
+<img src="/public/images/p1.png" alt="Imagen 1" width="200" height="150">
+<img src="/public/images/p2.png" alt="Imagen 1" width="220" height="150">
 
 ## Features (Planned)
 
