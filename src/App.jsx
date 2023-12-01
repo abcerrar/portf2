@@ -5,8 +5,17 @@ import Menu from "./components/menu/Menu";
 import { useEffect } from "react";
 import Terminal from "./components/Terminal/Terminal";
 import Skills from "./pages/skills/Skills";
+import { serverUrl } from "./config";
+import axios from "axios";
 
 function App(){
+
+	useEffect(() => {
+		axios.get(serverUrl).then((res) => {
+			console.log(res.data)
+		})
+	}, [])
+
 	return (
 		<BrowserRouter>
 			<Routes>
