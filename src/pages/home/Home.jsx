@@ -15,7 +15,7 @@ export default function Home(){
 				<TerminarWrite txtSpeed={50}>
 					<h1 id="1">Home</h1>
 					<p id="2">Nombre: David Colera</p>
-					<p id="3">Teléfono: 622510998</p>
+					<p id="3">Teléfono: 666555444</p>
 					<p id="4">Email: dcp@gmail.com</p>
 					
 					<p id="5" className="line_container">
