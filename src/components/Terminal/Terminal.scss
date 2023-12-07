@@ -31,8 +31,13 @@
 			color: $text3;
 		}
 		.terminalPrompt{
-			display: flex;
+			display: flex;			
 		}
+		.terminalPrompt input{
+			
+			width: 100%;		
+		}
+
 		.input_prompt{
 			background-color: $background3;
 			border: none;

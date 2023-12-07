@@ -23,7 +23,7 @@ function App(){
 			<Routes>
 				<Route path="/">
 					<Route index element={<Menu/>}/>
-					<Route path="*" element={<Menu/>}/>
+					<Route path="*" element={<Menu/>}/>					
 					<Route path="home" element={<Home/>}/>
 					<Route path="terminal" element={<Terminal/>}/>
 					<Route path="terminal/*" element={<Terminal/>}/>

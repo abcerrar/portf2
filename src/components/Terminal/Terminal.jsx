@@ -10,15 +10,15 @@ export default function Terminal(props){
 	const navigate = useNavigate();
 
 	const [current_path, setCurrent_path] = useState('/');
-	const orders = [];
-	orders[0] = <TerminalPrompt username="guest" path={props.path}/>;
+	const [components, setComponents] = useState([]);		
 
 	const url = useParams();
+	// console.log(url)
 	let component;
 	if (url['*'] === 'home')
-		component = <Home/>
+		components.push(<Home/>);
 	if (url['*'] === 'skills')
-		component = <Skills/>
+		component.unshift(<Skills/>);
 	
 	useEffect(() => {
 		const send = (e) => {
@@ -40,9 +40,10 @@ export default function Terminal(props){
 			<div className='terminalContainer'>
 
 				<div className="terminal">
-					{url['*'] !== undefined ? <TerminalPrompt username="guest" path={url['*']} txt={'./'+url['*']}/> : undefined}
-					{component}
-					{orders[0]}
+					{components.push(<TerminalPrompt username="guest" path={props.path}/>)}
+					{/* {url['*'] !== undefined ? components.unshift(<TerminalPrompt username="guest" path={url['*']} txt={'./'+url['*']}/>) : undefined} */}
+					{/* {component} */}
+					{components}
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 import Terminal from "../../components/Terminal/Terminal";
 import BorderAscii from "../../components/borderAscii/BorderAscii";
+import TitleAscii from "../../components/titleAscii/TitleAscii";
 import Skill from "./Skill";
 
 export default function Skills(){
@@ -31,7 +32,7 @@ export default function Skills(){
 	return (
 		<div className="skills_container">
 			<BorderAscii>
-				<h1>Skills</h1>
+				<TitleAscii>Skills</TitleAscii>
 				{
 					skills.map((skill, index) => (
 						<Skill name={skill.name} value={skill.value * 2} color={skill.color}/>		

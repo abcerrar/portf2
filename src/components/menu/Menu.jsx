@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import MenuElement from './MenuElement'
 import './menu.scss'
-import { useNavigate } from 'react-router-dom';
 export default function Menu(){
 
 	const [selected, setSelected] = useState(0);
-	const [selectFinish, setSelectFinish] = useState(0);
-	const navigate = useNavigate();
+	const [selectFinish, setSelectFinish] = useState(0);	
 	const he = require('he');
 
 	const menu_elements = [

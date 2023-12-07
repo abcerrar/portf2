@@ -4,5 +4,27 @@
 			"name": "Home",
 			"type": "e"
 		}
+	],
+	"aboutme": [
+		{
+			"name": "About Me",
+			"type": "e"
+		}
+	],
+	"projects": [
+		{
+			"name": "Projects",
+			"type": "e"
+		},
+		{
+			"name": "All Projects",
+			"type": "d",
+			"content": [
+				{
+					"name": "test_project_1",
+					"type": "e"
+				}
+			]
+		}
 	]
 }
