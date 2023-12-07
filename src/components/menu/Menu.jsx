@@ -48,6 +48,14 @@ export default function Menu(){
 	
 	useEffect (() => {
 		document.addEventListener('keydown', tecla_pulsada);
+		document.addEventListener('mouseover', (e) => {
+			for (let i = 0; i < menu_elements.length - 2; i++) {
+				if (menu_elements[i].props.txt === e.target.innerHTML)
+					setSelected(i);
+				
+			}
+			
+		});
 		return () => {
 			document.removeEventListener('keydown', tecla_pulsada);
 		};
