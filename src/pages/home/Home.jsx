@@ -6,14 +6,16 @@ import { useEffect } from "react";
 import Terminal from "../../components/Terminal/Terminal";
 import TerminarWrite from "../../components/terminalWrite/TerminalWrite";
 import BorderAscii from "../../components/borderAscii/BorderAscii";
+import TitleAscii from "../../components/titleAscii/TitleAscii";
 
 export default function Home(){
 
 	return (
 		<div className="homeContainer">
 			<BorderAscii>
+				<TitleAscii>Home</TitleAscii>
 				<TerminarWrite txtSpeed={50}>
-					<h1 id="1">Home</h1>
+					{/* <h1 id="1">Home</h1> */}
 					<p id="2">Nombre: David Colera</p>
 					<p id="3">Teléfono: 666555444</p>
 					<p id="4">Email: dcp@gmail.com</p>
