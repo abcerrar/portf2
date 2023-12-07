@@ -7,6 +7,7 @@ export default function Menu(){
 	const [selected, setSelected] = useState(0);
 	const [selectFinish, setSelectFinish] = useState(0);
 	const navigate = useNavigate();
+	const he = require('he');
 
 	const menu_elements = [
 		<MenuElement txt="Principal" path="/terminal/home" class={`${selected === 0 ? 'selected': ''}`}/>,
@@ -14,8 +15,8 @@ export default function Menu(){
 		<MenuElement txt="Poryectos" path="/terminal" class={`${selected === 2 ? 'selected': ''}`}/>,
 		<MenuElement txt="Habilidades" path="/terminal/skills" class={`${selected === 3 ? 'selected': ''}`}/>,
 		<MenuElement txt="Contacto" path="/terminal" class={`${selected === 4 ? 'selected': ''}`}/>,
-		<MenuElement txt="<Select>" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,
-		<MenuElement txt="<Exit>" path="/terminal" class={`${selectFinish === 1 ? 'waiting': ''}`}/>
+		<MenuElement txt="&lt;Select&gt;" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,
+		<MenuElement txt="&lt;Exit&gt;" path="/terminal" class={`${selectFinish === 1 ? 'waiting': ''}`}/>
 	]
 
 	const tecla_pulsada = (e) => {
@@ -45,17 +46,21 @@ export default function Menu(){
 				setSelectFinish(0)
 		}
 	}
+
+	const hover_controller = (e) => {
+		const len = menu_elements.length;
+			for (let i = 0; i < len - 2; i++)
+				if (menu_elements[i].props.txt === e.target.innerHTML)
+					setSelected(i);
+			if (menu_elements[len - 2].props.txt === he.decode(e.target.innerHTML))
+				setSelectFinish(0)
+			if (menu_elements[len - 1].props.txt === he.decode(e.target.innerHTML))
+				setSelectFinish(1)
+	}
 	
 	useEffect (() => {
 		document.addEventListener('keydown', tecla_pulsada);
-		document.addEventListener('mouseover', (e) => {
-			for (let i = 0; i < menu_elements.length - 2; i++) {
-				if (menu_elements[i].props.txt === e.target.innerHTML)
-					setSelected(i);
-				
-			}
-			
-		});
+		document.addEventListener('mouseover', hover_controller);
 		return () => {
 			document.removeEventListener('keydown', tecla_pulsada);
 		};
