@@ -13,7 +13,6 @@ export default function Terminal(props){
 
 	const [current_path, setCurrentPath] = useState(useParams()['*'] + '/');
 	
-	console.log(current_path)
 	if (current_path === undefined + '/')
 		setCurrentPath('');
 	
@@ -69,7 +68,7 @@ export default function Terminal(props){
 				<div className="terminal">
 					{/* {url['*'] !== undefined ? components.unshift(<TerminalPrompt username="guest" path={url['*']} txt={'./'+url['*']}/>) : undefined} */}
 					{/* {component} */}
-					{console.log(components)}		
+					{/* {console.log(components)}		 */}
 					{components.map((component, index) => (
 						<React.Fragment key={index}>{component}</React.Fragment>
 					))}

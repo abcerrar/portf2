@@ -1,8 +1,11 @@
 
 class Commands_controller{
-	constructor(){
+	constructor(path){
+		this.path = path;
+		
 		this.commands = {
 			help: this.showHelp,
+			pwd: this.showPath.bind(this),
 		}
 	}
 	executeCommand(command) {
@@ -16,11 +19,14 @@ class Commands_controller{
 	showHelp(){
 		return <p>Ayuda</p>
 	}
+	showPath(){
+		return <p>{(this.path)}</p>
+	}
 }
 
 export default function Commands(props){
 
-	const c = new Commands_controller();
+	const c = new Commands_controller(props.path);
 
 	return (
 		<div>
