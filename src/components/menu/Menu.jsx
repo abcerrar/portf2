@@ -9,8 +9,8 @@ export default function Menu(){
 
 	const menu_elements = [
 		<MenuElement txt="Principal" path="/terminal/home" class={`${selected === 0 ? 'selected': ''}`}/>,
-		<MenuElement txt="Sobre mi" path="/terminal" class={`${selected === 1 ? 'selected': ''}`}/>,
-		<MenuElement txt="Poryectos" path="/terminal" class={`${selected === 2 ? 'selected': ''}`}/>,
+		<MenuElement txt="Sobre mi" path="/terminal/aboutme" class={`${selected === 1 ? 'selected': ''}`}/>,
+		<MenuElement txt="Poryectos" path="/terminal/projects" class={`${selected === 2 ? 'selected': ''}`}/>,
 		<MenuElement txt="Habilidades" path="/terminal/skills" class={`${selected === 3 ? 'selected': ''}`}/>,
 		<MenuElement txt="Contacto" path="/terminal" class={`${selected === 4 ? 'selected': ''}`}/>,
 		<MenuElement txt="&lt;Select&gt;" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,

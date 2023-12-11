@@ -11,7 +11,8 @@ export default function Terminal(props){
 
 	const navigate = useNavigate();
 
-	let current_path = '';
+	let current_path = useParams()['*'];
+	console.log(current_path)
 	const [components, setComponents] = useState([]);		
 
 	const url = useParams();
