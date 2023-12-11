@@ -4,15 +4,19 @@ import TerminalPrompt from './TerminalPrompt'
 import Home from '../../pages/home/Home';
 import { useNavigate, useParams } from 'react-router-dom';
 import Skills from '../../pages/skills/Skills';
-import folders from '../../assets/folders';
+import Commands from './Commands';
 
 
 export default function Terminal(props){
 
 	const navigate = useNavigate();
 
-	let current_path = useParams()['*'];
+	const [current_path, setCurrentPath] = useState(useParams()['*'] + '/');
+	
 	console.log(current_path)
+	if (current_path === undefined + '/')
+		setCurrentPath('');
+	
 	const [components, setComponents] = useState([]);		
 
 	const url = useParams();
@@ -20,12 +24,10 @@ export default function Terminal(props){
 	function choose_initial(){
 		switch(url['*']){
 			case 'home':
-				current_path += 'Home/';
 				new_component(<TerminalPrompt username='guest' path='Home' txt='./Home'/>);
 				new_component(<Home/>);
 				break;
 			case 'skills':
-				current_path += 'Skills/';
 				new_component(<TerminalPrompt username='guest' path='Skills' txt='./Skills'/>);
 				new_component(<Skills/>);
 				break;
@@ -41,14 +43,17 @@ export default function Terminal(props){
 		const send = (e) => {
 			if (e.key === 'Enter'){
 				const input = window.document.getElementById("input");
-				const nuevo_nodo = <p>{input.value}</p>;
+				const nuevo_nodo = <Commands path={current_path} command={input.value}/>;
+				new_component(<TerminalPrompt username="guest" path={current_path} txt={input.value}/>);
+				input.value = '';
 				new_component(nuevo_nodo);
+				
 			}
 			if (e.key === 'Escape'){
 				navigate('/');
 			}
 		}
-		choose_initial();
+		choose_initial(); 
 		// console.log(folders['home']['content']);
 		window.document.addEventListener('keydown', send);
 		return () => {

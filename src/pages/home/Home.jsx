@@ -14,7 +14,7 @@ export default function Home(){
 		<div className="homeContainer">
 			<BorderAscii>
 				<TitleAscii>Home</TitleAscii>
-				<TerminarWrite txtSpeed={50}>
+				<TerminarWrite txtSpeed={10}>
 					{/* <h1 id="1">Home</h1> */}
 					<p id="2">Nombre: David Colera</p>
 					<p id="3">Teléfono: 666555444</p>
