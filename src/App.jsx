@@ -12,6 +12,7 @@ function App(){
 
 	useEffect(() => {
 		axios.get(serverUrl).then((res) => {
+			console.log("Server connected succesfuly")
 			console.log(res.data)
 		}).catch((error) => {
             console.error('Error al conectar con el servidor:', error);            
