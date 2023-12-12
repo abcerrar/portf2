@@ -11,6 +11,7 @@ class Commands_controller{
 			pwd: this.showPath.bind(this),
 			ls: this.showLs.bind(this),
 			cd: this.cd.bind(this),
+			clear: this.clear
 		}
 	}
 	executeCommand(command = "", args = []) {
@@ -27,10 +28,13 @@ class Commands_controller{
 	showPath(){
 		return <p>{(this.path)}</p>
 	}
+	clear(){
+		window.location.reload();
+	}
 	cd(args){
 		const path_arg = args[1] !== undefined ? args[1] : this.path;
 		
-		const currentPath = window.location.pathname;
+		const currentPath = window.location.pathname;	
 		let newPath = window.location.pathname;
 		
 		if (args[1] === undefined)

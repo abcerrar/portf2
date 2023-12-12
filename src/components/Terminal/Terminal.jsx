@@ -72,7 +72,7 @@ export default function Terminal(props){
 		<div className='container'>
 			<div className='terminalContainer'>
 
-				<div className="terminal">
+				<div className="terminal" id='terminal'>
 					{/* {url['*'] !== undefined ? components.unshift(<TerminalPrompt username="guest" path={url['*']} txt={'./'+url['*']}/>) : undefined} */}
 					{/* {component} */}
 					{/* {console.log(components)}		 */}
