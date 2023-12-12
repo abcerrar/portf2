@@ -35,7 +35,7 @@ export default function Skills(){
 				<TitleAscii>Skills</TitleAscii>
 				{
 					skills.map((skill, index) => (
-						<Skill name={skill.name} value={skill.value * 2} color={skill.color}/>		
+						<Skill key={index} name={skill.name} value={skill.value * 2} color={skill.color}/>		
 					))
 				}
 			</BorderAscii>

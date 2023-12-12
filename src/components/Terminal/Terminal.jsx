@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Terminal.scss'
 import TerminalPrompt from './TerminalPrompt'
 import Home from '../../pages/home/Home';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Skills from '../../pages/skills/Skills';
 import Commands from './Commands';
 
@@ -10,11 +10,10 @@ import Commands from './Commands';
 export default function Terminal(props){
 
 	const navigate = useNavigate();
+	const location = useLocation();
 
-	const [current_path, setCurrentPath] = useState(useParams()['*'] + '/');
-	
-	if (current_path === undefined + '/')
-		setCurrentPath('');
+	const [current_path, setCurrentPath] = useState(location.pathname.replace('/terminal', ''));
+	console.log(current_path)
 	
 	const [components, setComponents] = useState([]);		
 
@@ -38,20 +37,26 @@ export default function Terminal(props){
 		setComponents(components=> [...components, new_comp]);
 	}
 
-	useEffect(() => {
-		const send = (e) => {
-			if (e.key === 'Enter'){
-				const input = window.document.getElementById("input");
-				const nuevo_nodo = <Commands path={current_path} command={input.value}/>;
-				new_component(<TerminalPrompt username="guest" path={current_path} txt={input.value}/>);
-				input.value = '';
-				new_component(nuevo_nodo);
-				
-			}
-			if (e.key === 'Escape'){
-				navigate('/');
-			}
+	const send = (e) => {
+		if (e.key === 'Enter'){
+			const input = window.document.getElementById("input");
+			const nuevo_nodo = <Commands path={current_path} command={input.value.split(' ')[0]} args = {input.value.split(' ')}/>;
+			// setCurrentPath(window.location.pathname.replace('/terminal/', ''));
+			// console.log(window.location.pathname.replace('/terminal', ''));
+			new_component(<TerminalPrompt username="guest" path={window.location.pathname.replace('/terminal', '')} txt={input.value}/>);
+			input.value = '';
+			new_component(nuevo_nodo);
+			
 		}
+		if (e.key === 'Escape'){
+			navigate('/');
+		}
+	}
+	
+	useEffect(() => {
+		window.addEventListener('urlChanged', (e) => {
+			setCurrentPath(window.location.pathname.replace('/terminal', ''));
+		})
 		choose_initial(); 
 		// console.log(folders['home']['content']);
 		window.document.addEventListener('keydown', send);
@@ -60,6 +65,8 @@ export default function Terminal(props){
 		};
 	}, [])
 	
+	
+
 	return (
 		
 		<div className='container'>
@@ -70,8 +77,9 @@ export default function Terminal(props){
 					{/* {component} */}
 					{/* {console.log(components)}		 */}
 					{components.map((component, index) => (
-						<React.Fragment key={index}>{component}</React.Fragment>
+						<React.Fragment key={index}>{component}</React.Fragment>					
 					))}
+
 					{<TerminalPrompt username="guest" path={current_path}/>}
 				</div>
 			</div>

@@ -15,7 +15,7 @@ export default function TerminalPrompt(props){
 
 	return (
 		<p className="terminalPrompt">
-			{<span>{props.username}:</span>} /{props.path}$&nbsp;
+			{<span>{props.username}:</span>} {props.path}$&nbsp;
 			{txt}
 		</p>
 	);
