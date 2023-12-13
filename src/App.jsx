@@ -7,6 +7,7 @@ import Terminal from "./components/Terminal/Terminal";
 import Skills from "./pages/skills/Skills";
 import { serverUrl } from "./config";
 import axios from "axios";
+import { SharedContextProvider } from "./components/contexts/app.context";
 
 function App(){
 
@@ -20,19 +21,21 @@ function App(){
 	}, [])
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/">
-					<Route index element={<Menu/>}/>
-					<Route path="*" element={<Menu/>}/>					
-					<Route path="home" element={<Home/>}/>
-					<Route path="terminal" element={<Terminal/>}/>
-					<Route path="terminal/*" element={<Terminal/>}/>
-					<Route path="about_me" element={<AboutMe/>}/>
-					<Route path="skills" element={<Skills/>}/>
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<SharedContextProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/">
+						<Route index element={<Menu/>}/>
+						<Route path="*" element={<Menu/>}/>					
+						<Route path="home" element={<Home/>}/>
+						<Route path="terminal" element={<Terminal/>}/>
+						<Route path="terminal/*" element={<Terminal/>}/>
+						<Route path="about_me" element={<AboutMe/>}/>
+						<Route path="skills" element={<Skills/>}/>
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</SharedContextProvider>
 	)
 }
 export default App;
