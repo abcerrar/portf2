@@ -50,10 +50,11 @@ export default function Terminal(props){
 	const send = (e) => {
 		if (e.key === 'Enter'){
 			const input = window.document.getElementById("input");
-			const nuevo_nodo = <Commands path={current_path} command={input.value.split(' ')[0]} args = {input.value.split(' ')}/>;
+			const currPath = window.location.pathname.replace('/terminal', '') !== '' ?  window.location.pathname.replace('/terminal', '') : '/';
+			const nuevo_nodo = <Commands path={currPath} command={input.value.split(' ')[0]} args = {input.value.split(' ')}/>;
 			historial.push(input.value.split(' ')[0]);
 			historial_index = historial.length;
-			new_component(<TerminalPrompt username="guest" path={window.location.pathname.replace('/terminal', '')} txt={input.value}/>);
+			new_component(<TerminalPrompt username="guest" path={currPath} txt={input.value}/>);
 			input.value = '';
 			setCurrentext('')
 			new_component(nuevo_nodo);
