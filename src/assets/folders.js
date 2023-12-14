@@ -3,7 +3,7 @@ const folders = {
 	type: "d",
 	content: [
 		{
-			name: "Home",
+			name: "home",
 			type: "d",
 			content: [
 				{
@@ -19,12 +19,12 @@ const folders = {
 					]
 				},
 				{
-					name: 'test2', type: 'e'
+					name: 'test2.sh', type: 'e'
 				}
 			]
 		},
 		{
-			name: "About Me",
+			name: "aboutme",
 			type: "d",
 			content: [
 				{
@@ -36,7 +36,7 @@ const folders = {
 			]
 		},
 		{
-			name: "Projects",
+			name: "projects",
 			type: "d",
 			content: [
 				{

@@ -8,23 +8,52 @@ class Commands_controller{
 		this.path = path;
 		
 		this.commands = {
-			help: this.showHelp,
-			pwd: this.showPath.bind(this),
-			ls: this.showLs.bind(this),
-			cd: this.cd.bind(this),
-			clear: this.clear
+			help: {
+				desc: "Muestra ayuda",
+				function: this.showHelp.bind(this)
+			},
+			pwd: {
+				desc: "Sirve para saber la ruta actual",
+				function: this.showPath.bind(this),
+			},
+			ls: {
+				desc: "Muestra el contenido de un directorio",
+				function: this.showLs.bind(this),
+			},
+			cd: {
+				desc: "Te mueves hacia el directorio especificado",
+				function : this.cd.bind(this),
+			},
+			clear: {
+				desc: "Limpia la pantalla",
+				function: this.clear,
+			}
+			
 		}
 	}
 	executeCommand(command = "", args = []) {
 		if (this.commands.hasOwnProperty(command)) {
-			return this.commands[command](args);
+			return this.commands[command].function(args);
 		} else {			
 			return <p>{`Comando '${command}' no encontrado. Escribe 'help' para ver la lista de comandos disponibles.`}</p>;
 		}
 	}
 
-	showHelp(){
-		return <p>Ayuda</p>
+	showHelp(args){
+		const ayuda = [];
+		if (args !== undefined &&  args[1] !== undefined)
+			if (this.commands[args[1]] !== undefined)
+				return (<p>{this.commands[args[1]].desc}</p>)
+			else
+				return (this.showHelp());
+		else{
+			ayuda.push(<p>Lista de comandos disponibles</p>);
+			for(const command in this.commands){
+				ayuda.push(<p>{command} --&gt; {this.commands[command].desc}</p>);
+				
+			}			
+			return (<div>{ayuda}</div>);
+		}
 	}
 	showPath(){
 		return <p>{(this.path)}</p>
@@ -67,8 +96,11 @@ class Commands_controller{
 	}
 	print_folder_content(folder){
 		const files = [];
-		for (const file of folder){			
-			files.push(<p>{file.name}</p>);
+		for (const file of folder){	
+			if (file.type === 'd')
+				files.push(<p className="dir">{file.name}</p>);
+			if (file.type === 'e')
+				files.push(<p className="exec">{file.name}</p>);
 		}
 		return (files);
 	}
@@ -76,7 +108,6 @@ class Commands_controller{
 		let aux;
 		let current_folder = folders.content;
 		const path_splited = path.split('/').filter((item) => item !== '');
-		console.log(path_splited)
 		//check if exists
 		for (const folder_name of path_splited){	
 			
@@ -100,7 +131,7 @@ export default function Commands(props){
 
 	return (
 		<div className="command_output">
-			{c.executeCommand(props.command, props.args)}
+			{c.executeCommand(props.command, props.args)}			
 		</div>
 	)
 }
