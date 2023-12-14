@@ -12,6 +12,11 @@ class Commands_controller{
 				desc: "Muestra ayuda",
 				function: this.showHelp.bind(this)
 			},
+			man: {
+				desc: "Muestra ayuda",
+				function: this.showHelp.bind(this),
+				repetido: true
+			},
 			pwd: {
 				desc: "Sirve para saber la ruta actual",
 				function: this.showPath.bind(this),
@@ -20,6 +25,11 @@ class Commands_controller{
 				desc: "Muestra el contenido de un directorio",
 				function: this.showLs.bind(this),
 			},
+			dir: {
+				desc: "Muestra el contenido de un directorio",
+				function: this.showLs.bind(this),
+				repetido: true,
+			},
 			cd: {
 				desc: "Te mueves hacia el directorio especificado",
 				function : this.cd.bind(this),
@@ -27,6 +37,10 @@ class Commands_controller{
 			clear: {
 				desc: "Limpia la pantalla",
 				function: this.clear,
+			},
+			sh: {
+				desc: "Ejecuta un script",
+				function: this.execute.bind(this),
 			}
 			
 		}
@@ -49,8 +63,8 @@ class Commands_controller{
 		else{
 			ayuda.push(<p>Lista de comandos disponibles</p>);
 			for(const command in this.commands){
-				ayuda.push(<p>{command} --&gt; {this.commands[command].desc}</p>);
-				
+				if (this.commands[command].repetido !== true)
+					ayuda.push(<p>{command} --&gt; {this.commands[command].desc}</p>);
 			}			
 			return (<div>{ayuda}</div>);
 		}
@@ -60,6 +74,13 @@ class Commands_controller{
 	}
 	clear(){
 		window.location.reload();
+	}
+	execute(args){
+		console.log(this.find_folder(this.path + '/' + args[1]))
+		if (args !== undefined && args[1] !== undefined)
+			return (<p>{`Ejecutando ${args[1]}`}</p>)
+		else
+			return (<p>Debes introducir un argumento</p>)
 	}
 	cd(args){
 		const path_arg = args[1] !== undefined ? args[1] : this.path;
@@ -89,12 +110,14 @@ class Commands_controller{
 		if (args[1] !== undefined)
 			path_arg = this.path + '/' + args[1];	
 		const current_folder = this.find_folder(path_arg);
-		if (current_folder[0] === 'error'){
-			return (<p>{current_folder[1]}</p>) 
-		}
+		if (current_folder[0] === 'error')
+			return (<p>{`${current_folder[1]} no existe`}</p>) 
+		
 		return this.print_folder_content(current_folder);
 	}
 	print_folder_content(folder){
+		if (!Array.isArray(folder)) 
+			folder = [folder];
 		const files = [];
 		for (const file of folder){	
 			if (file.type === 'd')
@@ -110,18 +133,18 @@ class Commands_controller{
 		const path_splited = path.split('/').filter((item) => item !== '');
 		//check if exists
 		for (const folder_name of path_splited){	
-			
 			aux = current_folder.find(folder => folder.name === folder_name);				
 			if (aux !== undefined && aux.content && aux)
 				current_folder = aux.content;
-			else{
-				console.log(aux)
+			else{				
 				if (!aux)
-					return (["error", "Ese directorio no existe"]);
+					return (["error", folder_name]);
+				if (aux.type === 'e')
+					return (aux);
 				if (!aux.content)
 					return (["error", `${aux.name} no es un directorio`]);
 			}
-		}
+		}		
 		return (current_folder);
 	}
 }
