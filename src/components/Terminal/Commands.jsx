@@ -46,20 +46,37 @@ class Commands_controller{
 		}
 		else
 			newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
-
-		// console.log(folders)
-
 		const event = new Event('urlChanged');
 		window.history.pushState(null, null, newPath);
 		window.dispatchEvent(event);
 	}
 	showLs(args){
-		const path_splited = this.path.split('/').filter((item) => item !== '');
-		const current_folder = path_splited[path_splited.length - 1]
+		let current_folder = folders.content;
+		let aux = undefined;
 		const path_arg = args[1] !== undefined ? args[1] : this.path;
+		const path_splited = path_arg.split('/').filter((item) => item !== '');
 
-		for(let key in folders["home"]["content"]){
-			// console.log(folders["home"]["content"][key]["name"])
+		// console.log(path_splited)
+		for (const foldre_name of path_splited){	
+			aux = current_folder.find(folder => folder.name === foldre_name);
+			if (aux !== undefined && aux.content && aux)
+				current_folder = aux.content;
+			else
+				return (<p>Ese directorio no existe</p>)			
+		}		
+		return this.print_folder_content(current_folder);
+	}
+	print_folder_content(folder){
+		const files = [];
+		for (const file of folder){
+			console.log(file)
+			files.push(<p>{file.name}</p>);
+		}
+		return (files);
+	}
+	search_in_folder(folder = {}, currFolder = ""){
+		for (const folder in folders){
+			console.log(folder)
 		}
 	}
 }
@@ -68,7 +85,7 @@ export default function Commands(props){
 	const c = new Commands_controller(props.path);
 
 	return (
-		<div>
+		<div className="command_output">
 			{c.executeCommand(props.command, props.args)}
 		</div>
 	)

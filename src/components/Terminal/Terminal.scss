@@ -45,5 +45,13 @@
 			color: white;
 			outline: none;
 		}
+		.command_output{
+			display: flex;
+			padding: 3
+			px 0px;
+			p{
+				margin-right: 20px;
+			}
+		}
 	}
 }
