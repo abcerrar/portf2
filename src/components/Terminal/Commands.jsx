@@ -33,10 +33,9 @@ class Commands_controller{
 	}
 	cd(args){
 		const path_arg = args[1] !== undefined ? args[1] : this.path;
-		
 		const currentPath = window.location.pathname;	
 		let newPath = window.location.pathname;
-		
+
 		if (args[1] === undefined)
 			newPath='/terminal';
 		else if (args[1] === '..') {
@@ -44,41 +43,67 @@ class Commands_controller{
 			parts.pop();
 			newPath = '/' + parts.join('/');
 		}
-		else
-			newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
+		else{			
+			const return_value = this.find_folder(this.path + '/' + path_arg);
+			if(return_value[0] === "error")
+				return (<p>{return_value[1]}</p>)
+			else
+				newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
+		}
 		const event = new Event('urlChanged');
 		window.history.pushState(null, null, newPath);
 		window.dispatchEvent(event);
 	}
 	showLs(args){
-		let current_folder = folders.content;
-		let aux = undefined;
-		const path_arg = args[1] !== undefined ? args[1] : this.path;
-		const path_splited = path_arg.split('/').filter((item) => item !== '');
-
-		// console.log(path_splited)
-		for (const foldre_name of path_splited){	
-			aux = current_folder.find(folder => folder.name === foldre_name);
-			if (aux !== undefined && aux.content && aux)
-				current_folder = aux.content;
-			else
-				return (<p>Ese directorio no existe</p>)			
-		}		
+		// let current_folder = folders.content;
+		// let aux = undefined;
+		let path_arg = this.path;
+		if (args[1] !== undefined)
+			path_arg = this.path + '/' + args[1];
+		// const path_splited = path_arg.split('/').filter((item) => item !== '');
+		
+		// for (const folder_name of path_splited){	
+		// 	aux = current_folder.find(folder => folder.name === folder_name);			
+		// 	if (aux !== undefined && aux.content && aux)
+		// 		current_folder = aux.content;
+		// 	else
+		// 		return (<p>Ese directorio no existe</p>)			
+		// }		
+		const current_folder = this.find_folder(path_arg);
+		if (current_folder[0] === 'error'){
+			return (<p>{current_folder[1]}</p>) 
+		}
 		return this.print_folder_content(current_folder);
 	}
 	print_folder_content(folder){
 		const files = [];
-		for (const file of folder){
-			console.log(file)
+		for (const file of folder){			
 			files.push(<p>{file.name}</p>);
 		}
 		return (files);
 	}
-	search_in_folder(folder = {}, currFolder = ""){
-		for (const folder in folders){
-			console.log(folder)
+	find_folder(path = ""){
+		let aux;
+		let current_folder = folders.content;
+		const path_splited = path.split('/').filter((item) => item !== '');
+		console.log(path_splited)
+		//check if exists
+		for (const folder_name of path_splited){	
+			
+			aux = current_folder.find(folder => folder.name === folder_name);				
+			if (aux !== undefined && aux.content && aux)
+				current_folder = aux.content;
+			else{
+				console.log(aux)
+				if (!aux)
+					return (["error", "Ese directorio no existe"]);
+				if (!aux.content)
+					return (["error", `${aux.name} no es un directorio`]);
+			}
 		}
+		return (current_folder);
 	}
+	
 }
 
 export default function Commands(props){

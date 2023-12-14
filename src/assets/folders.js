@@ -7,10 +7,19 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'tetst1',	type: 'e'
+					name: 'test1',	
+					type: 'd',
+					content: [
+						{
+							name: 'hola',	type: 'e'
+						},
+						{
+							name: 'adios', type: 'e'
+						}
+					]
 				},
 				{
-					name: 'tetst2', type: 'e'
+					name: 'test2', type: 'e'
 				}
 			]
 		},
