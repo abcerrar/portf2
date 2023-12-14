@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import folders from "../../assets/folders";
 import { useLocation } from "react-router-dom";
+import TerminarWrite from "../terminalWrite/TerminalWrite";
 
 class Commands_controller{
 	constructor(path){
@@ -55,20 +56,9 @@ class Commands_controller{
 		window.dispatchEvent(event);
 	}
 	showLs(args){
-		// let current_folder = folders.content;
-		// let aux = undefined;
 		let path_arg = this.path;
 		if (args[1] !== undefined)
-			path_arg = this.path + '/' + args[1];
-		// const path_splited = path_arg.split('/').filter((item) => item !== '');
-		
-		// for (const folder_name of path_splited){	
-		// 	aux = current_folder.find(folder => folder.name === folder_name);			
-		// 	if (aux !== undefined && aux.content && aux)
-		// 		current_folder = aux.content;
-		// 	else
-		// 		return (<p>Ese directorio no existe</p>)			
-		// }		
+			path_arg = this.path + '/' + args[1];	
 		const current_folder = this.find_folder(path_arg);
 		if (current_folder[0] === 'error'){
 			return (<p>{current_folder[1]}</p>) 
@@ -103,7 +93,6 @@ class Commands_controller{
 		}
 		return (current_folder);
 	}
-	
 }
 
 export default function Commands(props){

@@ -52,7 +52,7 @@ export default function Terminal(props){
 			const input = window.document.getElementById("input");
 			const currPath = window.location.pathname.replace('/terminal', '') !== '' ?  window.location.pathname.replace('/terminal', '') : '/';
 			const nuevo_nodo = <Commands path={currPath} command={input.value.split(' ')[0]} args = {input.value.split(' ')}/>;
-			historial.push(input.value.split(' ')[0]);
+			historial.push(input.value);
 			historial_index = historial.length;
 			new_component(<TerminalPrompt username="guest" path={currPath} txt={input.value}/>);
 			input.value = '';
