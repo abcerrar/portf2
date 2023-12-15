@@ -73,10 +73,17 @@ class Commands_controller{
 				function: this.vim.bind(this),
 				repetido: true
 			},
+			echo: {
+				desc: "Imprime lo que le pases como argumento",
+				function: this.echo.bind(this),
+			},
 			
 		}
 	}
 	executeCommand(command = "", args = []) {
+		if (args[1] !== undefined && args[1][0] === '-')
+			return (<p>Aún no se admiten parametros adicionales</p>)
+		command = this.find_similar(command);
 		if (this.commands.hasOwnProperty(command)) {
 			return this.commands[command].function(args);
 		} else {			
@@ -109,6 +116,11 @@ class Commands_controller{
 	vim(){
 		return(<p>Aún no hay ningún editor de texto disponible, pero puedes consultar el contenido de un fichero usando 'cat'.</p>)
 	}
+	echo(args){
+		if (args === undefined || args[1] === undefined)
+			return (<p>Debes introducir un argumento</p>)
+		return (<p>{args.join(' ').replace('echo ', '')}</p>);
+	}
 	execute(args){
 		if (!args || args === undefined || !args[1] ||args[1] === undefined)
 			return (<p>Debes introducir un argumento</p>)
@@ -127,7 +139,7 @@ class Commands_controller{
 
 		if (args[1] === undefined)
 			newPath='/terminal';
-		else if (args[1] === '..') {
+		else if (args[1].includes('..')) {			
 			const parts = newPath.split('/').filter(Boolean);
 			parts.pop();
 			newPath = '/' + parts.join('/');
@@ -174,6 +186,8 @@ class Commands_controller{
 			return (<p>{`${args[1]} es un directorio`}</p>);
 		}
 		if (file.type === 'f' || file.type === 'e'){
+			if (file.txt === undefined)
+				return (<p>Error al intentar acceder al contenido de '{args[1]}'</p>)
 			const content = file.txt.split('#');
 			const read = [];
 			const countTabs = (content[0].match(/\t/g) || []).length;
@@ -200,6 +214,25 @@ class Commands_controller{
 				files.push(<p className="file">{file.name}</p>);
 		}
 		return (files);
+	}
+	find_similar(str = ""){
+		for (const command in this.commands){			
+			if (this.compare_strings(str, command))
+				return command;
+		}
+		return str;
+	}
+	compare_strings(str1="", str2=""){
+		let counter = 0;
+		if (str1.length !== str2.length)
+			return false;
+		for(const letra of str1.split('')){
+			if (!str2.includes(letra))
+				counter++;
+			if (counter === 2)
+				return false;
+		}
+		return true;
 	}
 	find_folder(path = ""){
 		let aux;
