@@ -30,14 +30,12 @@ export default function Menu(){
 		if (e.key === ' ' || e.key === 'Enter'){
 			e.preventDefault();
 			if (selectFinish === 0){
-				const path_selected = document.querySelector('#selected').href.split('/');
-				localStorage.setItem('launch', path_selected[path_selected.length - 1]);
-				document.querySelector("#selected").click();				
+				// const path_selected = document.querySelector('#selected').href.split('/');
+				// localStorage.setItem('launch', path_selected[path_selected.length - 1]);
+				document.querySelector("#selected").click();	
 			}
 			else
 				document.querySelector("#waiting ").click();
-				
-
 		}
 		if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
 			e.preventDefault();
@@ -58,10 +56,23 @@ export default function Menu(){
 			if (menu_elements[len - 1].props.txt === he.decode(e.target.innerHTML))
 				setSelectFinish(1)
 	}
-	
+	useEffect(() => {
+		const select = (e) => {
+			if (e.target.href !== undefined){
+				const path_selected = e.target.href.split('/');
+				localStorage.setItem('launch', path_selected[path_selected.length - 1]);
+			}
+		}
+		document.addEventListener('click', select)
+		return () => {
+			document.removeEventListener('click', select);
+		}
+	}, [])
 	useEffect (() => {
 		document.addEventListener('keydown', tecla_pulsada);
 		document.addEventListener('mouseover', hover_controller);
+		
+		
 		return () => {
 			document.removeEventListener('keydown', tecla_pulsada);
 		};
