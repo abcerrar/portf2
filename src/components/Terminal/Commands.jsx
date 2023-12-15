@@ -89,7 +89,7 @@ class Commands_controller{
 		window.location.reload();
 	}
 	execute(args){
-		console.log(this.find_folder(this.path + '/' + args[1]))
+		
 		if (args !== undefined && args[1] !== undefined)
 			return (this.find_folder(this.path + '/' + args[1]).code)
 			// return (<p>{`Ejecutando ${args[1]}`}</p>)
@@ -110,7 +110,7 @@ class Commands_controller{
 		}
 		else{			
 			const return_value = this.find_folder(this.path + '/' + path_arg);
-			console.log(return_value)
+			
 			if(return_value[0] === "error")
 				return (<p>{`${return_value[1]}`}</p>)
 			if (return_value.type === 'e')
@@ -118,9 +118,8 @@ class Commands_controller{
 			else
 				newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
 		}
-		const event = new Event('urlChanged');
 		window.history.pushState(null, null, newPath);
-		window.dispatchEvent(event);
+		window.dispatchEvent(new Event('urlChanged'));
 	}
 	showLs(args){
 		let path_arg = this.path;

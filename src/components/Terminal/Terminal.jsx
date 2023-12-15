@@ -83,14 +83,21 @@ export default function Terminal(props){
 	}
 
 	useEffect(() => {
+		const keep_sroll = (e) => {
+			if (e.key === 'Enter'){				
+				const terminal = document.getElementById('terminal');
+				terminal.scrollTop = terminal.scrollHeight;
+			}
+		}
 		window.document.addEventListener('keydown', navigate_historial);
-		window.document.addEventListener('keydown', send);		
+		window.document.addEventListener('keydown', send);
+		window.document.addEventListener('keydown', keep_sroll);
 		window.addEventListener('urlChanged', (e) => setCurrentPath(window.location.pathname.replace('/terminal', '')))
-
 		choose_initial(); 
 		return () => {
 			document.removeEventListener('keydown', send);
 			document.removeEventListener('keydown', navigate_historial);
+			document.removeEventListener('keydown', keep_sroll);
 		};
 	}, [])
 	
