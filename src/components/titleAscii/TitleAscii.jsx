@@ -3,6 +3,13 @@ import './titleAscii.scss'
 export default function TitleAscii(props){
 
 	const letter_map = {
+		' ': [
+		  '     ',
+		  '     ',
+		  '     ',
+		  '     ',
+		  '     ',
+		],
 		'A': [
 		  '  ##  ',
 		  ' #  # ',

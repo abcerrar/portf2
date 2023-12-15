@@ -8,6 +8,7 @@ import Skills from "./pages/skills/Skills";
 import { serverUrl } from "./config";
 import axios from "axios";
 import AppContext from "./components/contexts/app.context";
+import Contact from "./pages/contact/Contact";
 
 function App(){
 
@@ -34,6 +35,7 @@ function App(){
 						<Route path="terminal/*" element={<Terminal/>}/>
 						<Route path="about_me" element={<AboutMe/>}/>
 						<Route path="skills" element={<Skills/>}/>
+						<Route path="contact" element={<Contact/>}/>
 					</Route>
 				</Routes>
 			</BrowserRouter>

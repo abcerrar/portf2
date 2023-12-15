@@ -6,6 +6,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Skills from '../../pages/skills/Skills';
 import Commands from './Commands';
 import { SharedContext } from '../contexts/app.context';
+import Contact from '../../pages/contact/Contact';
+import AboutMe from '../../pages/aboutMe/AboutMe';
+import Projects from '../../pages/projects/Projects';
 
 
 export default function Terminal(props){
@@ -29,9 +32,21 @@ export default function Terminal(props){
 					new_component(<TerminalPrompt username='guest' path='/home' txt='exec home.sh'/>);
 					new_component(<Home/>);
 					break;				
+				case 'aboutme':
+					new_component(<TerminalPrompt username='guest' path='/aboutme' txt='exec aboutme.sh'/>);
+					new_component(<AboutMe/>);
+					break;				
+				case 'projects':
+					new_component(<TerminalPrompt username='guest' path='/projects' txt='exec projects.sh'/>);
+					new_component(<Projects/>);
+					break;				
 				case 'skills':
 					new_component(<TerminalPrompt username='guest' path='/skills' txt='exec skills.sh'/>);
 					new_component(<Skills/>);
+					break;
+				case 'contact':
+					new_component(<TerminalPrompt username='guest' path='/contact' txt='exec contact.sh'/>);
+					new_component(<Contact/>);
 					break;
 				default:
 					break;
@@ -60,7 +75,9 @@ export default function Terminal(props){
 			
 		}
 		if (e.key === 'Escape'){
-			navigate('/');
+			try{
+				navigate('/');
+			}catch(error){}
 		}
 	}
 	

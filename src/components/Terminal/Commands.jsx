@@ -1,5 +1,8 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import folders from "../../assets/folders";
 import Home from "../../pages/home/Home";
+import Menu from "../menu/Menu";
+import { useEffect } from "react";
 
 class Commands_controller{
 	constructor(path){
@@ -9,6 +12,10 @@ class Commands_controller{
 			help: {
 				desc: "Muestra ayuda",
 				function: this.showHelp.bind(this)
+			},
+			menu: {
+				desc: "Muestra el menú",
+				function: this.backMenu
 			},
 			man: {
 				desc: "Muestra ayuda",
@@ -89,6 +96,10 @@ class Commands_controller{
 		} else {			
 			return <p>{`Comando '${command}' no encontrado. Escribe 'help' para ver la lista de comandos disponibles.`}</p>;
 		}
+	}
+
+	backMenu(){
+		// function temporaly useless
 	}
 
 	showHelp(args){
@@ -258,6 +269,13 @@ class Commands_controller{
 
 export default function Commands(props){
 	const c = new Commands_controller(props.path);
+	const navigate = useNavigate();
+	
+
+	useEffect(() => {
+		if (props.command === "menu")
+			navigate('/')
+	}, [])
 
 	return (
 		<div className="command_output">

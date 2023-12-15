@@ -1,5 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
+import Contact from "../pages/contact/Contact";
 import Home from "../pages/home/Home";
+import Projects from "../pages/projects/Projects";
 import Skills from "../pages/skills/Skills";
 
 const folders = {
@@ -65,7 +67,7 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'test1',	type: 'e'
+					name: 'projects.sh', type: 'e', code: <Projects/>, txt: "undone" 
 				},
 				{
 					name: 'test2', type: 'e'
@@ -92,7 +94,7 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'skills.sh',	type: 'e', code: <Skills/>, txt: "undone"
+					name: 'contact.sh',	type: 'e', code: <Contact/>, txt: "undone"
 				},
 				{
 					name: 'test2', type: 'e'
