@@ -64,6 +64,15 @@ class Commands_controller{
 				function: this.cat.bind(this),
 				repetido: true
 			},
+			vim: {
+				desc: "Permite ver y editar un fichero",
+				function: this.vim.bind(this),
+			},
+			nano: {
+				desc: "Permite leer el contenido de un fichero",
+				function: this.vim.bind(this),
+				repetido: true
+			},
 			
 		}
 	}
@@ -96,6 +105,9 @@ class Commands_controller{
 	}
 	clear(){
 		window.location.reload();
+	}
+	vim(){
+		return(<p>Aún no hay ningún editor de texto disponible, pero puedes consultar el contenido de un fichero usando 'cat'.</p>)
 	}
 	execute(args){
 		if (!args || args === undefined || !args[1] ||args[1] === undefined)
@@ -156,7 +168,6 @@ class Commands_controller{
 		//if is directory
 		if (!file || file === undefined)
 			return (<p>{`Error al intentar leer el contenido de ${args[1]}`}</p>);
-			console.log(file)
 		if(Array.isArray(file)){
 			if (file[0] === 'error')
 				return (<p>{`${file[1]} no existe`}</p>)
