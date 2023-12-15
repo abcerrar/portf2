@@ -12,7 +12,7 @@ export default function Menu(){
 		<MenuElement txt="Sobre mi" path="/terminal/aboutme" class={`${selected === 1 ? 'selected': ''}`}/>,
 		<MenuElement txt="Poryectos" path="/terminal/projects" class={`${selected === 2 ? 'selected': ''}`}/>,
 		<MenuElement txt="Habilidades" path="/terminal/skills" class={`${selected === 3 ? 'selected': ''}`}/>,
-		<MenuElement txt="Contacto" path="/terminal" class={`${selected === 4 ? 'selected': ''}`}/>,
+		<MenuElement txt="Contacto" path="/terminal/contact" class={`${selected === 4 ? 'selected': ''}`}/>,
 		<MenuElement txt="&lt;Select&gt;" class={`${selectFinish === 0 ? 'waiting': ''}`}/>,
 		<MenuElement txt="&lt;Exit&gt;" path="/terminal" class={`${selectFinish === 1 ? 'waiting': ''}`}/>
 	]

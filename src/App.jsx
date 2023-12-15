@@ -2,26 +2,28 @@ import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-do
 import Home from "./pages/home";
 import AboutMe from "./pages/aboutMe/AboutMe";
 import Menu from "./components/menu/Menu";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Terminal from "./components/Terminal/Terminal";
 import Skills from "./pages/skills/Skills";
 import { serverUrl } from "./config";
 import axios from "axios";
-import { SharedContextProvider } from "./components/contexts/app.context";
+import AppContext from "./components/contexts/app.context";
 
 function App(){
 
+	const [userData, setUserData] = useState([{}]);
+
 	useEffect(() => {
-		axios.get(serverUrl).then((res) => {
+		axios.get(serverUrl+'/user').then((res) => {
 			console.log("Server connected succesfuly")
-			console.log(res.data)
+			setUserData(res.data);
 		}).catch((error) => {
             console.error('Error al conectar con el servidor:', error);            
         });
 	}, [])
 
 	return (
-		<SharedContextProvider>
+		<AppContext.Provider value={{userData}}>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/">
@@ -35,7 +37,7 @@ function App(){
 					</Route>
 				</Routes>
 			</BrowserRouter>
-		</SharedContextProvider>
+		</AppContext.Provider>
 	)
 }
 export default App;

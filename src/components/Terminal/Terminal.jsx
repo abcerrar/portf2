@@ -45,6 +45,8 @@ export default function Terminal(props){
 	}
 	
 	const send = (e) => {
+		if (document.getElementById('input'))
+			document.getElementById('input').focus();
 		if (e.key === 'Enter'){
 			const input = window.document.getElementById("input");
 			const currPath = window.location.pathname.replace('/terminal', '') !== '' ?  window.location.pathname.replace('/terminal', '') : '/';
