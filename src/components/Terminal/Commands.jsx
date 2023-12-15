@@ -55,6 +55,15 @@ class Commands_controller{
 				function: this.execute.bind(this),
 				repetido: true
 			},
+			cat: {
+				desc: "Permite leer el contenido de un fichero",
+				function: this.cat.bind(this),
+			},
+			read: {
+				desc: "Permite leer el contenido de un fichero",
+				function: this.cat.bind(this),
+				repetido: true
+			},
 			
 		}
 	}
@@ -89,12 +98,15 @@ class Commands_controller{
 		window.location.reload();
 	}
 	execute(args){
-		
-		if (args !== undefined && args[1] !== undefined)
-			return (this.find_folder(this.path + '/' + args[1]).code)
-			// return (<p>{`Ejecutando ${args[1]}`}</p>)
-		else
+		if (!args || args === undefined || !args[1] ||args[1] === undefined)
 			return (<p>Debes introducir un argumento</p>)
+		
+		const ejecutable = this.find_folder(this.path + '/' + args[1]);
+		if (Array.isArray(ejecutable))
+			return (<p>{`${args[1]} es un directorio`}</p>)
+		if (ejecutable.type === 'f')
+			return (<p>{`${args[1]} es un fichero`}</p>)
+		return ejecutable.code;
 	}
 	cd(args){
 		const path_arg = args[1] !== undefined ? args[1] : this.path;
@@ -112,8 +124,8 @@ class Commands_controller{
 			const return_value = this.find_folder(this.path + '/' + path_arg);
 			
 			if(return_value[0] === "error")
-				return (<p>{`${return_value[1]}`}</p>)
-			if (return_value.type === 'e')
+				return (<p>{`${return_value[1]} no existe`}</p>)
+			if (return_value.type === 'e' || return_value.type === 'f')	
 				return <p>{`${return_value.name} no es un directorio`}</p>;
 			else
 				newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
@@ -137,6 +149,33 @@ class Commands_controller{
 		
 		return this.print_folder_content(current_folder);
 	}
+	cat(args){
+		if (args[1] === undefined)
+			return (<p>Debes introducir el nombre de un fichero</p>)
+		const file = this.find_folder(this.path + '/' +args[1]);
+		//if is directory
+		if (!file || file === undefined)
+			return (<p>{`Error al intentar leer el contenido de ${args[1]}`}</p>);
+			console.log(file)
+		if(Array.isArray(file)){
+			if (file[0] === 'error')
+				return (<p>{`${file[1]} no existe`}</p>)
+			return (<p>{`${args[1]} es un directorio`}</p>);
+		}
+		if (file.type === 'f' || file.type === 'e'){
+			const content = file.txt.split('#');
+			const read = [];
+			const countTabs = (content[0].match(/\t/g) || []).length;
+			for (let line of content){
+				line = line.substring(countTabs, line.length );
+				read.push(<pre>{line}</pre>)
+			}
+
+			return (<div>{read}</div>)
+		}
+		return (<p>Error desconocido</p>);
+		
+	}
 	print_folder_content(folder){
 		if (!Array.isArray(folder)) 
 			folder = [folder];
@@ -146,6 +185,8 @@ class Commands_controller{
 				files.push(<p className="dir">{file.name}</p>);
 			if (file.type === 'e')
 				files.push(<p className="exec">{file.name}</p>);
+			if (file.type === 'f')
+				files.push(<p className="file">{file.name}</p>);
 		}
 		return (files);
 	}
@@ -161,7 +202,7 @@ class Commands_controller{
 			else{				
 				if (!aux)
 					return (["error", folder_name]);
-				if (aux.type === 'e')
+				if (aux.type === 'e' || aux.type === 'f')
 					return (aux);
 				if (!aux.content)
 					return (["error", `${aux.name} no es un directorio`]);

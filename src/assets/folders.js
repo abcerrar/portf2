@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import Home from "../pages/home/Home";
 
 const folders = {
@@ -9,7 +10,23 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'home.sh', type: 'e', code: <Home/>
+					name: 'home.sh', type: 'e', code: <Home/>, 
+					// eslint-disable-next-line no-multi-str
+					txt: "\
+					clear#\
+					declare -a presentation=(#\
+						+----------------------------------------+#\
+						|        Presentación de Contacto        |#\
+						|----------------------------------------|#\
+						| Nombre: David Colera                  |#\
+						| Teléfono: 666555444                   |#\
+						| Email: dcp@gmail.com                  |#\
+						+----------------------------------------+#\
+					)#\
+					for line in ${presentation[@]}; do#\
+						echo $line#\
+						sleep 1#\
+					done"
 				},
 				{
 					name: 'test1',	
@@ -23,6 +40,11 @@ const folders = {
 						}
 					]
 				},
+				{
+					name: "fichero.txt",
+					type: "f",
+					txt: "contenido del fichero"
+				}
 			]
 		},
 		{
