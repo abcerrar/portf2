@@ -50,6 +50,11 @@ class Commands_controller{
 				function: this.execute.bind(this),
 				repetido: true
 			},
+			bash: {
+				desc: "Ejecuta un script",
+				function: this.execute.bind(this),
+				repetido: true
+			},
 			
 		}
 	}

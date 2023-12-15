@@ -9,6 +9,9 @@ const folders = {
 			type: "d",
 			content: [
 				{
+					name: 'home.sh', type: 'e', code: <Home/>
+				},
+				{
 					name: 'test1',	
 					type: 'd',
 					content: [
@@ -20,9 +23,6 @@ const folders = {
 						}
 					]
 				},
-				{
-					name: 'test2.sh', type: 'e', code: <Home/>
-				}
 			]
 		},
 		{
