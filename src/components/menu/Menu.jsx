@@ -8,7 +8,7 @@ export default function Menu(){
 	const he = require('he');
 
 	const menu_elements = [
-		<MenuElement txt="Principal" path="/terminal/home" class={`${selected === 0 ? 'selected': ''}`}/>,
+		<MenuElement txt="Principal" path="/terminal/home" initial="home" class={`${selected === 0 ? 'selected': ''}`}/>,
 		<MenuElement txt="Sobre mi" path="/terminal/aboutme" class={`${selected === 1 ? 'selected': ''}`}/>,
 		<MenuElement txt="Poryectos" path="/terminal/projects" class={`${selected === 2 ? 'selected': ''}`}/>,
 		<MenuElement txt="Habilidades" path="/terminal/skills" class={`${selected === 3 ? 'selected': ''}`}/>,
@@ -27,10 +27,13 @@ export default function Menu(){
 			e.preventDefault();
 			setSelected(selected - 1)
 		}
-		if (e.key === ' '){
+		if (e.key === ' ' || e.key === 'Enter'){
 			e.preventDefault();
-			if (selectFinish === 0)
-				document.querySelector("#selected").click();
+			if (selectFinish === 0){
+				const path_selected = document.querySelector('#selected').href.split('/');
+				localStorage.setItem('launch', path_selected[path_selected.length - 1]);
+				document.querySelector("#selected").click();				
+			}
 			else
 				document.querySelector("#waiting ").click();
 				

@@ -30,16 +30,21 @@ export default function Terminal(props){
 
 	const url = useParams();
 	function choose_initial(){
-		switch(url['*']){
-			case 'home':
-				new_component(<TerminalPrompt username='guest' path='Home' txt='./Home'/>);
-				new_component(<Home/>);
-				break;
-			case 'skills':
-				new_component(<TerminalPrompt username='guest' path='Skills' txt='./Skills'/>);
-				new_component(<Skills/>);
-				break;
-			default:
+		const launched = localStorage.getItem('launch');
+		if (launched !== undefined){
+			switch(launched){
+				case 'home':
+					new_component(<TerminalPrompt username='guest' path='/home' txt='exec home.sh'/>);
+					new_component(<Home/>);
+					break;				
+				case 'skills':
+					new_component(<TerminalPrompt username='guest' path='/skills' txt='exec skills.sh'/>);
+					new_component(<Skills/>);
+					break;
+				default:
+					break;
+			}
+			localStorage.setItem('launch', undefined);
 		}
 	}
 
@@ -89,7 +94,7 @@ export default function Terminal(props){
 		window.document.addEventListener('keydown', navigate_historial);
 		window.document.addEventListener('keydown', send);		
 		window.addEventListener('urlChanged', (e) => setCurrentPath(window.location.pathname.replace('/terminal', '')))
-		
+
 		choose_initial(); 
 		return () => {
 			document.removeEventListener('keydown', send);

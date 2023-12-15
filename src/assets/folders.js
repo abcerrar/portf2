@@ -1,3 +1,5 @@
+import Home from "../pages/home/Home";
+
 const folders = {
 	name: "root",
 	type: "d",
@@ -19,7 +21,7 @@ const folders = {
 					]
 				},
 				{
-					name: 'test2.sh', type: 'e'
+					name: 'test2.sh', type: 'e', code: <Home/>
 				}
 			]
 		},
@@ -28,10 +30,10 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'tetst1',	type: 'e'
+					name: 'test1',	type: 'e'
 				},
 				{
-					name: 'tetst2', type: 'e'
+					name: 'test2', type: 'e'
 				}
 			]
 		},
@@ -40,10 +42,25 @@ const folders = {
 			type: "d",
 			content: [
 				{
-					name: 'tetst1',	type: 'e'
+					name: 'test1',	type: 'e'
 				},
 				{
-					name: 'tetst2', type: 'e'
+					name: 'test2', type: 'e'
+				}
+			]
+		},
+		{
+			name: "skills",
+			type: "d",
+			content: [
+				{
+					name: 'test1',	type: 'e'
+				},
+				{
+					name: 'test2', type: 'e'
+				},
+				{
+					name: 'tetst3', type: 'e'
 				}
 			]
 		}

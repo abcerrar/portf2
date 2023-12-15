@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import folders from "../../assets/folders";
-import { useLocation } from "react-router-dom";
-import TerminarWrite from "../terminalWrite/TerminalWrite";
+import Home from "../../pages/home/Home";
 
 class Commands_controller{
 	constructor(path){
@@ -38,10 +36,20 @@ class Commands_controller{
 				desc: "Limpia la pantalla",
 				function: this.clear,
 			},
+			cls: {
+				desc: "Limpia la pantalla",
+				function: this.clear,
+				repetido: true
+			},
+			exec: {
+				desc: "Ejecuta un script",
+				function: this.execute.bind(this),
+			},
 			sh: {
 				desc: "Ejecuta un script",
 				function: this.execute.bind(this),
-			}
+				repetido: true
+			},
 			
 		}
 	}
@@ -78,7 +86,8 @@ class Commands_controller{
 	execute(args){
 		console.log(this.find_folder(this.path + '/' + args[1]))
 		if (args !== undefined && args[1] !== undefined)
-			return (<p>{`Ejecutando ${args[1]}`}</p>)
+			return (this.find_folder(this.path + '/' + args[1]).code)
+			// return (<p>{`Ejecutando ${args[1]}`}</p>)
 		else
 			return (<p>Debes introducir un argumento</p>)
 	}
@@ -97,7 +106,7 @@ class Commands_controller{
 		else{			
 			const return_value = this.find_folder(this.path + '/' + path_arg);
 			if(return_value[0] === "error")
-				return (<p>{return_value[1]}</p>)
+				return (<p>{`${return_value[1]} no es una carpeta o directorio`}</p>)
 			else
 				newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
 		}
@@ -107,8 +116,14 @@ class Commands_controller{
 	}
 	showLs(args){
 		let path_arg = this.path;
-		if (args[1] !== undefined)
-			path_arg = this.path + '/' + args[1];	
+		if (args[1] !== undefined){
+			if (args[1] === '..') {
+				const parts = path_arg.split('/').filter(Boolean);
+				parts.pop();
+				path_arg = '/' + parts.join('/');
+			}else
+				path_arg = this.path + '/' + args[1];
+		}
 		const current_folder = this.find_folder(path_arg);
 		if (current_folder[0] === 'error')
 			return (<p>{`${current_folder[1]} no existe`}</p>) 
@@ -137,6 +152,8 @@ class Commands_controller{
 			if (aux !== undefined && aux.content && aux)
 				current_folder = aux.content;
 			else{				
+				console.log(aux)
+				console.log(path)
 				if (!aux)
 					return (["error", folder_name]);
 				if (aux.type === 'e')
