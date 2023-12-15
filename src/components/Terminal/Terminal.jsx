@@ -12,14 +12,7 @@ export default function Terminal(props){
 
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	// const {sharedData, setSharedData} = useContext(SharedContext);
-	// const {sharedData2, setSharedData2} = useContext(SharedContext);
-	// setSharedData('hola');
-	// setSharedData2('adios');
-	// console.log(sharedData)
-	// console.log(sharedData2)
-
+	
 	const [current_path, setCurrentPath] = useState(location.pathname.replace('/terminal', ''));
 	const [current_text, setCurrentext] = useState('');
 	const historial = [];
@@ -27,8 +20,7 @@ export default function Terminal(props){
 	// console.log(current_path)
 	
 	const [components, setComponents] = useState([]);		
-
-	const url = useParams();
+	
 	function choose_initial(){
 		const launched = localStorage.getItem('launch');
 		if (launched !== undefined){
@@ -51,7 +43,7 @@ export default function Terminal(props){
 	const new_component = (new_comp) => {
 		setComponents(components=> [...components, new_comp]);
 	}
-
+	
 	const send = (e) => {
 		if (e.key === 'Enter'){
 			const input = window.document.getElementById("input");
@@ -113,7 +105,7 @@ export default function Terminal(props){
 					{components.map((component, index) => (
 						<React.Fragment key={index}>{component}</React.Fragment>					
 					))}	
-					{<TerminalPrompt username="guest" path={current_path} value={current_text} focus = {true}/>}
+					{<TerminalPrompt username="guest" path={current_path === '' ? '/' : current_path} value={current_text} focus = {true}/>}
 				</div>
 			</div>
 		</div>

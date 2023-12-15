@@ -110,8 +110,11 @@ class Commands_controller{
 		}
 		else{			
 			const return_value = this.find_folder(this.path + '/' + path_arg);
+			console.log(return_value)
 			if(return_value[0] === "error")
-				return (<p>{`${return_value[1]} no es una carpeta o directorio`}</p>)
+				return (<p>{`${return_value[1]}`}</p>)
+			if (return_value.type === 'e')
+				return <p>{`${return_value.name} no es un directorio`}</p>;
 			else
 				newPath = currentPath.endsWith('/') ? currentPath + path_arg : currentPath + '/' + path_arg; 
 		}
@@ -157,8 +160,6 @@ class Commands_controller{
 			if (aux !== undefined && aux.content && aux)
 				current_folder = aux.content;
 			else{				
-				console.log(aux)
-				console.log(path)
 				if (!aux)
 					return (["error", folder_name]);
 				if (aux.type === 'e')
